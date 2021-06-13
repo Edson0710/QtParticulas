@@ -316,6 +316,7 @@
     </property>
     <addaction name="actionRecorridos"/>
     <addaction name="actionPrim"/>
+    <addaction name="actionKruskal"/>
    </widget>
    <addaction name="menuArchivo"/>
    <addaction name="menuAlgoritmos"/>
@@ -345,6 +346,11 @@
   <action name="actionPrim">
    <property name="text">
     <string>Prim</string>
+   </property>
+  </action>
+  <action name="actionKruskal">
+   <property name="text">
+    <string>Kruskal</string>
    </property>
   </action>
  </widget>

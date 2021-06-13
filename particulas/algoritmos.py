@@ -68,3 +68,61 @@ def algoritmoPrim(grafo : dict, origen):
             arbol.append(arista)
     return arbol
 
+#   Algoritmo de kruskal
+
+class DisjointSet:
+    def __init__(self):
+        self.elements = []
+
+    def print(self):
+        print(self.elements)
+
+    def make_set(self,element):
+        for elem in self.elements:
+            if element in elem:
+                return False
+        self.elements.append([element])
+        return True
+
+    def find_set(self,element):
+        for index,elem in enumerate(self.elements):
+            if element in elem:
+                return index
+        return -1 
+    
+    def union(self,A,B):
+        index_A = self.find_set(A)
+        index_B = self.find_set(B)
+
+        self.elements[index_A] += self.elements[index_B]
+        self.elements.pop(index_B)
+
+def kruskal(grafo : dict):
+    arbol_expansion = []
+    ds = DisjointSet()
+    lista = PriorityQueue()
+
+    for nodo in grafo:
+        for ady in grafo.get(nodo):
+            arista = (ady[1] * - 1 , nodo, ady[0])     
+            lista.put(arista)
+
+        ds.make_set(nodo)
+
+    ds.print()
+
+    while not lista.empty():
+        arista = lista.get()
+
+        origen = arista[1]
+        destino = arista[2]
+
+        if ds.find_set(origen) != ds.find_set(destino):
+            arbol_expansion.append(arista)
+            ds.union(origen,destino)
+
+            print(f"Arista = {arista}")    
+            ds.print()
+
+    return arbol_expansion
+

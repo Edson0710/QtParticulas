@@ -82,6 +82,28 @@ class Particulas:
         self.grafo = grafo
         return self.grafo
 
+    def to_dict_velocidad(self):
+        grafo = dict()
+        for particula in self.__lista:
+            #   Origen 
+            key = (particula.origen_x, particula.origen_y)
+            value = ((particula.destino_x, particula.destino_y), round(particula.velocidad))
+            if key in grafo:
+                grafo[key].append(value)
+            else:
+                grafo[key] = [value]
+            #   Destino
+            key = (particula.destino_x, particula.destino_y)
+            value = ((particula.origen_x, particula.origen_y), round(particula.velocidad))
+            if key in grafo:
+                grafo[key].append(value)
+            else:
+                grafo[key] = [value]
+
+        self.grafo = grafo
+        return self.grafo
+        
+
     def recorrido_profundidad(self, origen):
         recorrido = recorridoProfundidad(self.grafo, origen)
         return self.recorrido_toString(recorrido)
@@ -98,6 +120,10 @@ class Particulas:
     
     def prim(self, origen):
         return algoritmoPrim(self.grafo, origen)
+
+    def kruskal(self):
+        dict_grafo = self.to_dict_velocidad()
+        return kruskal(dict_grafo)
 
 
 

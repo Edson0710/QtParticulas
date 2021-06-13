@@ -26,6 +26,8 @@ class Ui_MainWindow(object):
         self.actionRecorridos.setObjectName(u"actionRecorridos")
         self.actionPrim = QAction(MainWindow)
         self.actionPrim.setObjectName(u"actionPrim")
+        self.actionKruskal = QAction(MainWindow)
+        self.actionKruskal.setObjectName(u"actionKruskal")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.gridLayout_4 = QGridLayout(self.centralwidget)
@@ -260,6 +262,7 @@ class Ui_MainWindow(object):
         self.menuArchivo.addAction(self.actionGuardar)
         self.menuAlgoritmos.addAction(self.actionRecorridos)
         self.menuAlgoritmos.addAction(self.actionPrim)
+        self.menuAlgoritmos.addAction(self.actionKruskal)
 
         self.retranslateUi(MainWindow)
 
@@ -281,6 +284,7 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(shortcut)
         self.actionRecorridos.setText(QCoreApplication.translate("MainWindow", u"Recorrido Profundidad/Amplitud", None))
         self.actionPrim.setText(QCoreApplication.translate("MainWindow", u"Prim", None))
+        self.actionKruskal.setText(QCoreApplication.translate("MainWindow", u"Kruskal", None))
         self.velocidad_pushButton.setText(QCoreApplication.translate("MainWindow", u"Velocidad", None))
         self.id_pushButton.setText(QCoreApplication.translate("MainWindow", u"id", None))
         self.distancia_pushButton.setText(QCoreApplication.translate("MainWindow", u"Distancia", None))

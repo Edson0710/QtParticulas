@@ -34,8 +34,32 @@ class MainWindow(QMainWindow):
         self.ui.grafo_pushButton.clicked.connect(self.mostrar_grafo)
         self.ui.actionRecorridos.triggered.connect(self.recorridos)
         self.ui.actionPrim.triggered.connect(self.prim)
+        self.ui.actionKruskal.triggered.connect(self.kruskal)
 
         self.grafo = False 
+    
+    @Slot()
+    def kruskal(self):
+        if not self.grafo or len(self.particulas) == 0:
+            QMessageBox.critical(
+                self,
+                "No se puede dibujar",
+                "Es necesario que se convierta a grafo antes de realizar un recorrido"
+            )
+        else:
+            #Cambiar a ventana de dibujo
+            self.ui.tabWidget.setCurrentIndex(2)
+            self.dibujar()
+            pen = QPen()
+            pen.setWidth(2)
+            color = QColor(255,0,0)
+            pen.setColor(color)
+            arbol_expansion = self.particulas.kruskal()
+            print(arbol_expansion)
+            for arista in arbol_expansion:
+                    origen = arista[1]
+                    destino = arista[2]
+                    self.scene.addLine(origen[0]+3, origen[1]+3, destino[0]+3, destino[1]+3, pen)
 
     @Slot()
     def prim(self):
