@@ -125,6 +125,9 @@ class Particulas:
         dict_grafo = self.to_dict_velocidad()
         return kruskal(dict_grafo)
 
+    def dijkstra(self, origen):
+        return algoritmoDijkstra(self.grafo, origen)
+
 
 
 #p01 = Particula(id=1, origen_x=150, origen_y=150, destino_x=500, destino_y=500, velocidad=300,

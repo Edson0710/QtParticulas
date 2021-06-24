@@ -126,3 +126,29 @@ def kruskal(grafo : dict):
 
     return arbol_expansion
 
+#   Algoritmo de Dijkstra
+def algoritmoDijkstra(grafo : dict, origen):
+    distancias = dict()
+    ruta = dict()
+    lista = PriorityQueue()
+    for nodo in grafo:
+        if nodo == origen:
+            distancias[nodo] = 0
+            ruta[nodo] = origen
+        else:
+            distancias[nodo] = 999999
+            ruta[nodo] = ()
+    lista.put((0,origen))
+    while not lista.empty():
+        elemento = lista.get()
+        nodo = elemento[1]      
+        for arista in grafo[nodo]:
+            distancia = arista[1] + elemento[0] 
+            destino = arista[0]
+
+            if distancia < distancias[destino]:
+                distancias[destino] = distancia
+                ruta[destino] = nodo
+                lista.put((distancia, destino))
+    return distancias, ruta
+

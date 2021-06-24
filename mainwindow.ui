@@ -317,6 +317,7 @@
     <addaction name="actionRecorridos"/>
     <addaction name="actionPrim"/>
     <addaction name="actionKruskal"/>
+    <addaction name="actionDijkstra"/>
    </widget>
    <addaction name="menuArchivo"/>
    <addaction name="menuAlgoritmos"/>
@@ -351,6 +352,11 @@
   <action name="actionKruskal">
    <property name="text">
     <string>Kruskal</string>
+   </property>
+  </action>
+  <action name="actionDijkstra">
+   <property name="text">
+    <string>Dijkstra</string>
    </property>
   </action>
  </widget>

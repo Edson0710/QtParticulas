@@ -35,9 +35,55 @@ class MainWindow(QMainWindow):
         self.ui.actionRecorridos.triggered.connect(self.recorridos)
         self.ui.actionPrim.triggered.connect(self.prim)
         self.ui.actionKruskal.triggered.connect(self.kruskal)
+        self.ui.actionDijkstra.triggered.connect(self.dijkstra)
 
         self.grafo = False 
-    
+
+    @Slot()
+    def dijkstra(self):
+        if not self.grafo or len(self.particulas) == 0:
+            QMessageBox.critical(
+                self,
+                "No se puede dibujar",
+                "Es necesario que se convierta a grafo antes de realizar un recorrido"
+            )
+        else:
+            #   Obtener punto de origen y punto de partida
+            origen_x = int(self.ui.origenx_spinBox.text())
+            origen_y = int(self.ui.origeny_spinBox.text())
+            origen = (origen_x, origen_y)
+            destino_x = int(self.ui.destinox_spinBox.text())
+            destino_y = int(self.ui.destinoy_spinBox.text())
+            destino = (destino_x, destino_y)
+            if origen not in self.particulas.to_dict() or destino not in self.particulas.to_dict():
+                QMessageBox.critical(
+                self,
+                "No se puede recorrer",
+                "Las coordenadas del origen o destino no corresponden a ningun nodo del grafo."
+                )
+            else:
+                distancias, camino = self.particulas.dijkstra(origen)
+                print('')
+                formated = pformat(distancias, width=40, indent=1)
+                print(formated)
+                print('')
+                formated = pformat(camino, width=40, indent=1)
+                print(formated)              
+                self.ui.tabWidget.setCurrentIndex(2)
+                self.scene.clear()
+                pen = QPen()
+                pen.setColor(QColor(255, 0, 0))
+                dimension = 5
+                pen.setWidth(dimension)
+
+                siguiente = destino
+
+                while siguiente != origen:
+                    actual = camino[siguiente]                    
+                    self.scene.addLine(actual[0]+3, actual[1]+3, siguiente[0], siguiente[1], pen)                    
+                    siguiente = camino[siguiente]
+
+
     @Slot()
     def kruskal(self):
         if not self.grafo or len(self.particulas) == 0:
